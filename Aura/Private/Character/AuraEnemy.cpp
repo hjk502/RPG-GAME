@@ -3,3 +3,16 @@
 
 #include "Character/AuraEnemy.h"
 
+/////////////////////////////////////////////////////////////////
+/// AuraPlayerController mouse highlight system 
+/////////////////////////////////////////////////////////////////
+
+void AAuraEnemy::HighlightActor()
+{
+	
+}
+
+void AAuraEnemy::UnHighlightActor()
+{
+	
+}
