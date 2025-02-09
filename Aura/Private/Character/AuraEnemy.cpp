@@ -4,15 +4,15 @@
 #include "Character/AuraEnemy.h"
 
 /////////////////////////////////////////////////////////////////
-/// AuraPlayerController mouse highlight system 
+/// AuraPlayerEnemy mouse highlight system 
 /////////////////////////////////////////////////////////////////
 
 void AAuraEnemy::HighlightActor()
 {
-	
+	bHighlighted = true;
 }
 
 void AAuraEnemy::UnHighlightActor()
 {
-	
+	bHighlighted = false;
 }

@@ -5,6 +5,7 @@
 
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "Interaction/EnemyInterface.h"
 
 AAuraPlayerController::AAuraPlayerController()
 {
@@ -33,6 +34,12 @@ void AAuraPlayerController::BeginPlay()
 	SetInputMode(InputModeData);
 }
 
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+
+	CursorTrace();
+}
 
 /////////////////////////////////////////////////////////////////
 /// AuraPlayerController handle input system 
@@ -62,4 +69,69 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 		ControllerPawn->AddMovementInput(ForwardDirection,InputAxisVector.Y);
 		ControllerPawn->AddMovementInput(RightDirection,InputAxisVector.X);
 	}
+}
+
+/////////////////////////////////////////////////////////////////
+/// AuraPlayerController mouse cursor system 
+/////////////////////////////////////////////////////////////////
+
+void AAuraPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;
+	GetHitResultUnderCursor(ECC_Visibility,false,CursorHit);
+	
+	if(!CursorHit.bBlockingHit){return;}
+
+	//check if the interface is implemented
+	LastActor=ThisActor;
+	ThisActor=Cast<IEnemyInterface>(CursorHit.GetActor());
+
+	/**
+	 * Line Trace from cursor .There are several scenarios
+	 *  A. LastActor is null && ThisActor is null
+	 *		- Do nothing.
+	 *	B. LastActor is null && ThisActor is valid
+	 *		- Highlight ThisActor
+	 *	C. LastActor is Valid && ThisActor is null
+	 *		- UnHighlight Last Actor
+	 *	D. Both actors are valid ,but LastActor !=ThisActor
+	 *		-UnHighlight LastActor ,and Highlight This Actor
+	 *	E. Both actors are Valid, and are the same actor
+	 *		-Do nothing
+	 */
+
+	if(LastActor==nullptr)
+	{
+		if(ThisActor!=nullptr)
+		{
+			//Case B
+			ThisActor->HighlightActor();
+		}
+		else
+		{
+			//Case A -both are null,do nothing
+		}
+	}
+	else //Last Actor is Valid
+	{
+		if(ThisActor==nullptr)
+		{
+			//Case C - UnHighlight Last Actor
+			LastActor->UnHighlightActor();
+		}
+		else //both actors are valid
+		{
+			if(LastActor!=ThisActor)
+			{
+				//Case D
+				LastActor->UnHighlightActor();
+				ThisActor->HighlightActor();
+			}
+			else
+			{
+				//Case E -do nothing
+			}
+		}
+	}
+	
 }

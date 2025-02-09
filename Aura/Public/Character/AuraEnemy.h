@@ -21,4 +21,8 @@ public:
 
 	//interface of HighlightActor in Aura
 	virtual void UnHighlightActor() override;
+
+	UPROPERTY(BlueprintReadOnly)
+	bool bHighlighted=false;
+	
 };
