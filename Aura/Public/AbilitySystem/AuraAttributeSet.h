@@ -4,7 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "AbilitySystemComponent.h"
 #include "AuraAttributeSet.generated.h"
+
+#define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 /**
  * 
@@ -28,17 +35,29 @@ public:
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Health,Category="Vital Attributes")
 	FGameplayAttributeData Health;
 
+	//this macro make 4 function here(include set/init/get health)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Health);
+	
 	//character/Enemy's MaxHealth
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_MaxHealth,Category="Vital Attributes")
 	FGameplayAttributeData MaxHealth;
 
+	//this macro make 4 function here(include set/init/get Maxhealth)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,MaxHealth);
+
 	//character/Enemy's current mana
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Mana,Category="Vital Attributes")
 	FGameplayAttributeData Mana;
+	
+	//this macro make 4 function here(include set/init/get Mana)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Mana);
 
 	//character/Enemy's MaxMana
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_MaxMana,Category="Vital Attributes")
 	FGameplayAttributeData MaxMana;
+
+	//this macro make 4 function here(include set/init/get Mana)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,MaxMana);
 
 	//the function call on the client when Health change on server
 	UFUNCTION()
