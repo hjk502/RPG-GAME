@@ -15,9 +15,17 @@ class AURA_API AAuraCharacter : public AAuraCharacterBase
 	GENERATED_BODY()
 	
 private:
+
+	//set the ability component's OwnerActor and AvatarActor
+	void InitAbilityActorInfo();
+
 	
 protected:
 	
 public:
 	AAuraCharacter();
+
+	virtual void PossessedBy(AController* NewController) override;
+
+	virtual void OnRep_PlayerState() override;
 };
