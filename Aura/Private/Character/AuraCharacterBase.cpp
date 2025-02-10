@@ -23,4 +23,11 @@ void AAuraCharacterBase::BeginPlay()
 	
 }
 
+/////////////////////////////////////////////////////////////////
+/// AuraPlayerController AbilitySystemComponent system 
+/////////////////////////////////////////////////////////////////
 
+UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
