@@ -1,4 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
+//base widget controller
 
 #pragma once
 
@@ -6,6 +7,32 @@
 #include "AbilitySystemComponent.h"
 #include "UObject/NoExportTypes.h"
 #include "AuraWidgetController.generated.h"
+
+class UAttributeSet;
+class UAbilitySystemComponent;
+
+USTRUCT(BlueprintType)
+struct FWidgetControllerParams
+{
+	GENERATED_BODY()
+
+	FWidgetControllerParams(){}
+
+	FWidgetControllerParams(APlayerController* PC,APlayerState* PS,UAbilitySystemComponent* ASC,UAttributeSet* AS)
+	: PlayerController(PC),PlayerState(PS),AbilitySystemComponent(ASC),AttributeSet(AS){};
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TObjectPtr<APlayerController> PlayerController=nullptr;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TObjectPtr<APlayerState> PlayerState=nullptr;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent=nullptr;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	TObjectPtr<UAttributeSet> AttributeSet=nullptr;
+};
 
 /**
  * 
@@ -35,4 +62,8 @@ protected:
 	TObjectPtr<UAttributeSet> AttributeSet;
 	
 public:
+
+	//set four store variable in WidgetController
+	UFUNCTION(BlueprintCallable)
+	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 };

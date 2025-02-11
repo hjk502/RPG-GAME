@@ -33,8 +33,8 @@ private:
     void CursorTrace();
 
 	//test the actor if implemented interface
-	IEnemyInterface* LastActor;
-	IEnemyInterface* ThisActor;
+	TObjectPtr<IEnemyInterface> LastActor;
+	TObjectPtr<IEnemyInterface> ThisActor;
 	
 protected:
 	virtual void BeginPlay() override;
