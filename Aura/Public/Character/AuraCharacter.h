@@ -16,7 +16,7 @@ class AURA_API AAuraCharacter : public AAuraCharacterBase
 	
 private:
 
-	//set the ability component's OwnerActor and AvatarActor
+	//set the ability component's OwnerActor and AvatarActor(connect component with character)
 	void InitAbilityActorInfo();
 
 	

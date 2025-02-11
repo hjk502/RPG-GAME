@@ -10,6 +10,8 @@
 void AAuraEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	//link the abilitySystemComponent with enemy
 	AbilitySystemComponent->InitAbilityActorInfo(this,this);
 }
 
