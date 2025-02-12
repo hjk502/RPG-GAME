@@ -3,11 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayEffect.h"
 #include "GameFramework/Actor.h"
 #include "AuraEffectActor.generated.h"
 
-class USphereComponent;
-class UStaticMeshComponent;
+class UGameplayEffect;
 
 UCLASS()
 class AURA_API AAuraEffectActor : public AActor
@@ -16,25 +16,16 @@ class AURA_API AAuraEffectActor : public AActor
 	
 private:
 
-	//the actor's overlap sphere
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USphereComponent> Sphere;
-
-	//the static mesh of this actor
-	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> Mesh;
+	UPROPERTY(EditAnywhere,Category="Effects")
+	TSubclassOf<UGameplayEffect> InstanceGameplayEffectClass;
 	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	//call sphere overlap with other pawn/actor
-	UFUNCTION()
-	virtual void OnOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep,const FHitResult& SweepResult);
-
-	//call when sphere end overlap with other pawn/actor
-	UFUNCTION()
-	virtual void EndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	//
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* Target,TSubclassOf<UGameplayEffect> GameplayEffectClass);
 	
 public:	
 	// Sets default values for this actor's properties
