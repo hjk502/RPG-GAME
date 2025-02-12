@@ -66,4 +66,6 @@ public:
 	//set four store variable in WidgetController
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
+
+	virtual void BoardcastInitialValue();
 };
