@@ -15,17 +15,19 @@ class AURA_API AAuraEffectActor : public AActor
 	GENERATED_BODY()
 	
 private:
-
-	UPROPERTY(EditAnywhere,Category="Effects")
-	TSubclassOf<UGameplayEffect> InstanceGameplayEffectClass;
 	
 protected:
+
+	//ASC will expose AS to it auto
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Effects")
+	TSubclassOf<UGameplayEffect> InstanceGameplayEffectClass;
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	//
+	//apply effect actor's effect to the character
 	UFUNCTION(BlueprintCallable)
-	void ApplyEffectToTarget(AActor* Target,TSubclassOf<UGameplayEffect> GameplayEffectClass);
+	void ApplyEffectToTarget(AActor* TargetActor,TSubclassOf<UGameplayEffect> GameplayEffectClass);
 	
 public:	
 	// Sets default values for this actor's properties
