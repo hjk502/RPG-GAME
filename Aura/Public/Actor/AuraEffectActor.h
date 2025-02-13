@@ -21,6 +21,10 @@ protected:
 	//ASC will expose AS to it auto
 	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Effects")
 	TSubclassOf<UGameplayEffect> InstanceGameplayEffectClass;
+
+	//ASC will expose AS to it auto
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Effects")
+	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass;
 	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
