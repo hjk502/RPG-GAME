@@ -28,6 +28,9 @@ protected:
 public:
 	UAuraAttributeSet();
 
+	//call before attributes value change(use for clamp attributes value)
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+
 	//the function to register replicate variable
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
