@@ -1,5 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+//GameEffect will know it By ASC
 #pragma once
 
 #include "CoreMinimal.h"
@@ -13,6 +13,48 @@
 	GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
 	GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY()
+
+	FEffectProperties(){}
+
+	FGameplayEffectContextHandle EffectContextHandle;
+
+	//the GameEffect's source ASC
+	UPROPERTY()
+	UAbilitySystemComponent* SourceASC=nullptr;
+
+	//the GameEffect's Source actor
+	UPROPERTY()
+	AActor* SourceAvatarActor=nullptr;
+
+	//the GameEffect's source controller
+	UPROPERTY()
+	AController* SourceController=nullptr;
+
+	//the GameEffect's source character
+	UPROPERTY()
+	ACharacter* SourceCharacter=nullptr;
+
+	//the GameEffect Target ASC
+	UPROPERTY()
+	UAbilitySystemComponent* TargetASC=nullptr;
+
+	//the GameEffect target actor
+	UPROPERTY()
+	AActor* TargetAvatarActor=nullptr;
+
+	//the GameEffect target's controller
+	UPROPERTY()
+	AController* TargetController=nullptr;
+
+	//the GameEffect target character
+	UPROPERTY()
+	ACharacter* TargetCharacter=nullptr;
+};
+
 /**
  * 
  */
@@ -22,6 +64,9 @@ class AURA_API UAuraAttributeSet : public UAttributeSet
 	GENERATED_BODY()
 
 private:
+
+	//get the message about this GameEffect that influence the Properties
+	void SetEffectProperties(const FGameplayEffectModCallbackData& Data,FEffectProperties& Props);
 	
 protected:
 
@@ -30,6 +75,8 @@ public:
 
 	//call before attributes value change(use for clamp attributes value)
 	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+
+	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
 	//the function to register replicate variable
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
