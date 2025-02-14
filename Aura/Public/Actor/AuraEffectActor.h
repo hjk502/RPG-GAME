@@ -76,11 +76,17 @@ protected:
 	UFUNCTION(BlueprintCallable)
 	void ApplyEffectToTarget(AActor* TargetActor,TSubclassOf<UGameplayEffect> GameplayEffectClass);
 
+	//call when character overlap actor
 	UFUNCTION(BlueprintCallable)
 	void OnOverlap(AActor* TargetActor);
 
+	//call when character end overlap actor
 	UFUNCTION(BlueprintCallable)
 	void OnEndOverlap(AActor* TargetActor);
+
+	//the level of this effect level(level will influence the effect of effect actor)
+	UPROPERTY(EditAnywhere,BlueprintReadOnly,Category="Effects")
+	float ActorLevel=1.5f;
 	
 public:	
 	// Sets default values for this actor's properties
