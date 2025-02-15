@@ -6,6 +6,8 @@
 #include "AbilitySystemComponent.h"
 #include "AuraAbilitySystemComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FEffectAssetTags,const FGameplayTagContainer& /*store Asset Tags*/);
+
 /**
  * 
  */
@@ -23,4 +25,7 @@ public:
 
 	//initial aura ASC
 	void AbilityActorInfoSet();
+
+	//
+	FEffectAssetTags EffectAssetTags;
 };

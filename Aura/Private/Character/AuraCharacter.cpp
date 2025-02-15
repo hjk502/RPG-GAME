@@ -48,6 +48,8 @@ void AAuraCharacter::InitAbilityActorInfo()
 	check(AuraPlayerState);
 
 	//initial ASC
+	
+	//the ASC will know the attributes from InOwnerActor and InAvatarActor
 	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState,this);
 	Cast<UAuraAbilitySystemComponent>(AuraPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent=AuraPlayerState->GetAbilitySystemComponent();
