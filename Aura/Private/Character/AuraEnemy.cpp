@@ -11,8 +11,7 @@ void AAuraEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	//link the abilitySystemComponent with enemy
-	AbilitySystemComponent->InitAbilityActorInfo(this,this);
+	InitAbilityActorInfo();
 }
 
 AAuraEnemy::AAuraEnemy()
@@ -43,4 +42,16 @@ void AAuraEnemy::UnHighlightActor()
 {
 	GetMesh()->SetRenderCustomDepth(false);
 	Weapon->SetRenderCustomDepth(false);
+}
+
+/////////////////////////////////////////////////////////////////
+/// AuraCharacter initial ASC system
+/////////////////////////////////////////////////////////////////
+
+void AAuraEnemy::InitAbilityActorInfo()
+{
+	//link the abilitySystemComponent with enemy
+	AbilitySystemComponent->InitAbilityActorInfo(this,this);
+
+	Cast<UAuraAbilitySystemComponent>(GetAbilitySystemComponent())->AbilityActorInfoSet();
 }

@@ -31,3 +31,12 @@ UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
 }
+
+/////////////////////////////////////////////////////////////////
+/// AuraCharacter initial ASC system 
+/////////////////////////////////////////////////////////////////
+
+void AAuraCharacterBase::InitAbilityActorInfo()
+{
+	
+}

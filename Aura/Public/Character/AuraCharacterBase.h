@@ -32,6 +32,8 @@ protected:
 	//the Base AttributeSet
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	virtual void InitAbilityActorInfo();
 	
 public:
 	// Sets default values for this character's properties

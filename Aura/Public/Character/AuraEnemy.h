@@ -20,6 +20,9 @@ private:
 protected:
 
 	virtual void BeginPlay() override;
+
+	//set the ability component's OwnerActor and AvatarActor(connect component with character)
+	virtual void InitAbilityActorInfo() override;
 	
 public:
 
