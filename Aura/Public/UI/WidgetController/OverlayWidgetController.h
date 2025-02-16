@@ -28,10 +28,8 @@ struct FUIWidgetRow:public FTableRowBase
 };
 
 //delegate declear
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature,float,NewHealth);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature,float,NewMaxHealth);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature,float,NewMana);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature,float,NewMaxMana);
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnAttributeChangedSignature,float,NewValue);
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMessageWidgetRowSignature,FUIWidgetRow,Row);
 
@@ -55,18 +53,6 @@ protected:
 	template<typename T>
 	T* GetDataTableRowByTag(UDataTable* DataTable,const FGameplayTag& Tag);
 	
-	//when Health change,call widget controller to change it on HUD
-	void HealthChanged(const FOnAttributeChangeData& Data) const;
-
-	//when MaxHealth change,call widget controller to change it on HUD
-	void MaxHealthChanged(const FOnAttributeChangeData& Data)const;
-
-	//when Mana change,call widget controller to change it on HUD
-	void ManaChanged(const FOnAttributeChangeData& Data)const;
-
-	//when MaxMana change,call widget controller to change it on HUD
-	void MaxManaChanged(const FOnAttributeChangeData& Data)const;
-	
 public:
 
 	//boardCast initial value to widget bind with this controller
@@ -77,19 +63,19 @@ public:
 
 	//bind the function call when the health change,Overlay will listen it and change variable on HUD
 	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
-	FOnHealthChangedSignature OnHealthChanged;
+	FOnAttributeChangedSignature OnHealthChanged;
 
 	//bind the function call when the MaxHealth change,Overlay will listen it and change variable on HUD
 	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
-	FOnMaxHealthChangedSignature OnMaxHealthChanged;
+	FOnAttributeChangedSignature OnMaxHealthChanged;
 
 	//bind the function call when the mana change,Overlay will listen it and change variable on HUD
 	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
-	FOnManaChangedSignature OnManaChanged;
+	FOnAttributeChangedSignature OnManaChanged;
 
 	//bind the function call when the MaxMana change,Overlay will listen it and change variable on HUD
 	UPROPERTY(BlueprintAssignable,Category="GAS|Attributes")
-	FOnMaxManaChangedSignature OnMaxManaChanged;
+	FOnAttributeChangedSignature OnMaxManaChanged;
 
 	//
 	UPROPERTY(BlueprintAssignable,Category="GAS|Messages")
