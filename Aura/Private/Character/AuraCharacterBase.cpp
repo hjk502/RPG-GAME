@@ -2,6 +2,7 @@
 
 
 #include "Character/AuraCharacterBase.h"
+#include "AbilitySystemComponent.h"
 
 // Sets default values
 AAuraCharacterBase::AAuraCharacterBase()
@@ -24,7 +25,7 @@ void AAuraCharacterBase::BeginPlay()
 }
 
 /////////////////////////////////////////////////////////////////
-/// AuraPlayerController AbilitySystemComponent system 
+/// AuraCharacterBase AbilitySystemComponent system 
 /////////////////////////////////////////////////////////////////
 
 UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
@@ -33,10 +34,25 @@ UAbilitySystemComponent* AAuraCharacterBase::GetAbilitySystemComponent() const
 }
 
 /////////////////////////////////////////////////////////////////
-/// AuraCharacter initial ASC system 
+/// AuraCharacterBase initial ASC system 
 /////////////////////////////////////////////////////////////////
 
 void AAuraCharacterBase::InitAbilityActorInfo()
 {
 	
+}
+
+/////////////////////////////////////////////////////////////////
+/// AuraCharacterBase initial Attributes Set default value 
+/////////////////////////////////////////////////////////////////
+
+void AAuraCharacterBase::InitializePrimaryAttributes() const
+{
+
+	check(IsValid(GetAbilitySystemComponent()));
+	check(DefaultPrimaryAttributes);
+	
+	const FGameplayEffectContextHandle ContextHandle=GetAbilitySystemComponent()->MakeEffectContext();
+	const FGameplayEffectSpecHandle SpecHandle=GetAbilitySystemComponent()->MakeOutgoingSpec(DefaultPrimaryAttributes,1.f,ContextHandle);
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(),GetAbilitySystemComponent()); 
 }
