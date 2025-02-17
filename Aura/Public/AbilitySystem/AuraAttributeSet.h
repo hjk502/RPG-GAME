@@ -81,6 +81,45 @@ public:
 	//the function to register replicate variable
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
+
+	/**
+	 * Primary Attributes
+	 */
+
+	//character/Enemy's current strength
+	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Strength,Category="Primary Attributes")
+	FGameplayAttributeData Strength;
+	
+	//this macro make 4 function here(include set/init/get Strength)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Strength);
+
+
+	//character/Enemy's current Intelligence
+	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Intelligence,Category="Primary Attributes")
+	FGameplayAttributeData Intelligence;
+	
+	//this macro make 4 function here(include set/init/get Intelligence)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Intelligence);
+
+	//character/Enemy's current Resilience
+	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Resilience,Category="Primary Attributes")
+	FGameplayAttributeData Resilience;
+	
+	//this macro make 4 function here(include set/init/get Resilience)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Resilience);
+
+	//character/Enemy's current Vigor
+	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Vigor,Category="Primary Attributes")
+	FGameplayAttributeData Vigor;
+	
+	//this macro make 4 function here(include set/init/get Vigor)
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Vigor);
+
+	/**
+	 * Vital Attributes
+	 */
+
+	
 	//character/Enemy's current health
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Health,Category="Vital Attributes")
 	FGameplayAttributeData Health;
@@ -124,4 +163,20 @@ public:
 	//the function call on the client when MaxMana change on server
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana) const;
+
+	//the function call on the client when Strength change on server
+	UFUNCTION()
+	void OnRep_Strength(const FGameplayAttributeData& OldStrength) const;
+
+	//the function call on the client when Intelligence change on server
+	UFUNCTION()
+	void OnRep_Intelligence(const FGameplayAttributeData& OldIntelligence) const;
+
+	//the function call on the client when Resilience change on server
+	UFUNCTION()
+	void OnRep_Resilience(const FGameplayAttributeData& OldResilience) const;
+
+	//the function call on the client when Vigor change on server
+	UFUNCTION()
+	void OnRep_Vigor(const FGameplayAttributeData& OldVigor) const;
 };

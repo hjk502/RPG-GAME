@@ -22,7 +22,7 @@ private:
 protected:
 
 	//the AbilitySystemComponent in AuraPlayerState
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
 	//the AttributeSet in AuraPlayerState
