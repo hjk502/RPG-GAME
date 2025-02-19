@@ -67,3 +67,15 @@ void AAuraCharacter::InitAbilityActorInfo()
 	//initial the character's Attributes's default value
 	InitializeDefaultAttriutes();
 }
+
+/////////////////////////////////////////////////////////////////
+/// AuraCharacter Level system 
+/////////////////////////////////////////////////////////////////
+
+int32 AAuraCharacter::GetPlayerLevel()
+{
+	AAuraPlayerState* AuraPlayerState=GetPlayerState<AAuraPlayerState>();
+	check(AuraPlayerState);
+
+	return AuraPlayerState->GetPlayerLevel();
+}

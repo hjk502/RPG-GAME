@@ -18,7 +18,14 @@ class AURA_API AAuraPlayerState : public APlayerState,public IAbilitySystemInter
 {
 	GENERATED_BODY()
 private:
+	
+	//character current level
+	UPROPERTY(VisibleAnywhere,ReplicatedUsing=OnRep_Level)
+	int32 Level=1;
 
+	UFUNCTION()
+	void OnRep_Level(int32 OldLevel);
+	
 protected:
 
 	//the AbilitySystemComponent in AuraPlayerState
@@ -34,9 +41,15 @@ public:
 
 	AAuraPlayerState();
 
+	//the function to register replicate variable
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	//get the AbilitySystemComponent in AuraPlayerState
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
 	//get the AttributeSet in AuraPlayerState
 	UAttributeSet* GetAttributeSet(){return AttributeSet;}
+
+	//get the character's level store in the PlayerState
+	FORCEINLINE int32 GetPlayerLevel() const{return Level;}
 };

@@ -26,7 +26,7 @@ AAuraEnemy::AAuraEnemy()
 }
 
 /////////////////////////////////////////////////////////////////
-/// AuraPlayerEnemy mouse highlight system 
+/// AuraEnemy mouse highlight system 
 /////////////////////////////////////////////////////////////////
 
 void AAuraEnemy::HighlightActor()
@@ -45,7 +45,7 @@ void AAuraEnemy::UnHighlightActor()
 }
 
 /////////////////////////////////////////////////////////////////
-/// AuraCharacter initial ASC system
+/// AuraEnemy initial ASC system
 /////////////////////////////////////////////////////////////////
 
 void AAuraEnemy::InitAbilityActorInfo()
@@ -55,3 +55,13 @@ void AAuraEnemy::InitAbilityActorInfo()
 
 	Cast<UAuraAbilitySystemComponent>(GetAbilitySystemComponent())->AbilityActorInfoSet();
 }
+
+/////////////////////////////////////////////////////////////////
+/// AuraEnemy Level system 
+/////////////////////////////////////////////////////////////////
+
+int32 AAuraEnemy::GetPlayerLevel()
+{
+	return Level;
+}
+
