@@ -34,12 +34,19 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-	//the class of gameEffect to initialized the default Attributes value
+	//the class of gameEffect to initialized the primary Attributes value
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
 	TSubclassOf<class UGameplayEffect> DefaultPrimaryAttributes;
 
-	//initial character/enemy 's default attributes value
-	void InitializePrimaryAttributes() const;
+	//the class of gameEffect to initialized the secondary Attributes value(when primary Attributes value change it will auto change)
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
+	TSubclassOf<class UGameplayEffect> DefaultSecondaryAttributes;
+
+	//apply the effect(that Set primary/secondary attributes) to self
+	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GamePlayEffectClass,float Level) const;
+
+	//initialized primary/secondary default attributes value
+	void InitializeDefaultAttriutes() const;
 
 	virtual void InitAbilityActorInfo();
 	
