@@ -43,6 +43,10 @@ protected:
 	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
 	TSubclassOf<class UGameplayEffect> DefaultSecondaryAttributes;
 
+	//the class of gameEffect to initialized the Vital Attributes value(when primary Attributes value change it will auto change)
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Attributes")
+	TSubclassOf<class UGameplayEffect> DefaultVitalAttributes;
+
 	//apply the effect(that Set primary/secondary attributes) to self
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GamePlayEffectClass,float Level) const;
 
