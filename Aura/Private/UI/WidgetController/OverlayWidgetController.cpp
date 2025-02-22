@@ -71,6 +71,8 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 
 				//For example, say that Tag = Message.HealthPotion
 				//"Message. HealthPotion". MatchesTag("Message") will return True, "Message". MatchesTag("Message.HealthPotion") will return False
+
+				//request the tags from MessageTags system
 				FGameplayTag MessageTag=FGameplayTag::RequestGameplayTag(FName("Message"));
 
 				//if the Tag belong to Message
