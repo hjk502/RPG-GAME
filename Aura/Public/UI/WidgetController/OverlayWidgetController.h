@@ -56,7 +56,7 @@ protected:
 public:
 
 	//boardCast initial value to widget bind with this controller
-	virtual void BoardcastInitialValue() override;
+	virtual void BroadcastInitialValue() override;
 
 	//bind the function call when the attributes change,Overlay will listen it and change variable on HUD
 	virtual void BindCallbacksToDependencies() override;

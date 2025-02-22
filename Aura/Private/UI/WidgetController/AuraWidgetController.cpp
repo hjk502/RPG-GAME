@@ -13,7 +13,7 @@ void UAuraWidgetController::SetWidgetControllerParams(const FWidgetControllerPar
 	
 }
 
-void UAuraWidgetController::BoardcastInitialValue()
+void UAuraWidgetController::BroadcastInitialValue()
 {
 	
 }

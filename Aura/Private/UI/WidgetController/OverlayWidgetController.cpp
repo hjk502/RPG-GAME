@@ -10,7 +10,7 @@
 /// UI variable Initial system 
 /////////////////////////////////////////////////////////////////
 
-void UOverlayWidgetController::BoardcastInitialValue()
+void UOverlayWidgetController::BroadcastInitialValue()
 {
 	const UAuraAttributeSet* AuraAttributeSet=CastChecked<UAuraAttributeSet>(AttributeSet);
 

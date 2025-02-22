@@ -68,7 +68,7 @@ public:
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 
 	
-	virtual void BoardcastInitialValue();
+	virtual void BroadcastInitialValue();
 
 	virtual void BindCallbacksToDependencies();
 };
