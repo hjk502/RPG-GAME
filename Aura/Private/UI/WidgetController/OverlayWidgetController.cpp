@@ -34,6 +34,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetHealthAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
+			//delegate bind in the blueprint
 			OnHealthChanged.Broadcast(Data.NewValue);
 		}
 	);
@@ -42,6 +43,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetMaxHealthAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
+			//delegate bind in the blueprint
 			OnMaxHealthChanged.Broadcast(Data.NewValue);
 		}
 	);
@@ -50,6 +52,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetManaAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
+			//delegate bind in the blueprint
 			OnManaChanged.Broadcast(Data.NewValue);
 		}
 	);
@@ -58,6 +61,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 	AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(AuraAttributeSet->GetMaxManaAttribute()).AddLambda(
 		[this](const FOnAttributeChangeData& Data)
 		{
+			//delegate bind in the blueprint
 			OnMaxManaChanged.Broadcast(Data.NewValue);
 		}
 	);
@@ -75,7 +79,7 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 				//request the tags from MessageTags system
 				FGameplayTag MessageTag=FGameplayTag::RequestGameplayTag(FName("Message"));
 
-				//if the Tag belong to Message
+				//if the Tag belong to Message,when effect actor effect,pass this actor's detail(by tags),to overlay blueprint to show pickup hint
 				if(Tag.MatchesTag(MessageTag))
 				{
 					//get the DataTable's row by tag
