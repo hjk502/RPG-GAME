@@ -3,19 +3,23 @@
 
 #include "UI/HUD/AuraHUD.h"
 
+#include "UI/WidgetController/AttributeMenuWidgetController.h"
+
+/////////////////////////////////////////////////////////////////
+/// AuraHUD OverlayWidget system
+/////////////////////////////////////////////////////////////////
+
 UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
 {
 	if(OverlayWidgetController==nullptr)
 	{
 		OverlayWidgetController=NewObject<UOverlayWidgetController>(this,OverlayWidgetControllerClass);
 
-		//the overlayController need 4 parameter(playerState and so on) about the Module
+		//the overlayController need 4 parameter(playerState and so on) to know the message from Module(here use MMC module)
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
 
 		//bind the function call when the attributes change
 		OverlayWidgetController->BindCallbacksToDependencies();
-
-		return OverlayWidgetController;
 	}
 	return OverlayWidgetController;
 }
@@ -39,4 +43,24 @@ void AAuraHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 	WidgetController->BroadcastInitialValue();
 	
 	Widget->AddToViewport();
+}
+
+/////////////////////////////////////////////////////////////////
+/// AuraHUD AttributeMenuWidget system
+/////////////////////////////////////////////////////////////////
+
+UAttributeMenuWidgetController* AAuraHUD::GetAttributeMenuWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if(AttributeMenuWidgetController==nullptr)
+	{
+		AttributeMenuWidgetController=NewObject<UAttributeMenuWidgetController>(this,AttributeMenuWidgetControllerClass);
+
+		//the AttributeMenuController need 4 parameter(playerState and so on) to know the message from Module(here use MMC module)
+		AttributeMenuWidgetController->SetWidgetControllerParams(WCParams);
+
+		AttributeMenuWidgetController->BindCallbacksToDependencies();
+		
+	}
+
+	return AttributeMenuWidgetController;
 }
