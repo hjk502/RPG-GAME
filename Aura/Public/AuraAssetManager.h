@@ -18,6 +18,7 @@ private:
 
 protected:
 
+	//call when ue Asset start initial
 	virtual void StartInitialLoading() override;
 	
 public:
