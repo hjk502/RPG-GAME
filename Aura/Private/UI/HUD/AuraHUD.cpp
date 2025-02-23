@@ -8,6 +8,8 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 	if(OverlayWidgetController==nullptr)
 	{
 		OverlayWidgetController=NewObject<UOverlayWidgetController>(this,OverlayWidgetControllerClass);
+
+		//the overlayController need 4 parameter(playerState and so on) about the Module
 		OverlayWidgetController->SetWidgetControllerParams(WCParams);
 
 		//bind the function call when the attributes change

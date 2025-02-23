@@ -55,7 +55,7 @@ void AAuraCharacter::InitAbilityActorInfo()
 	AbilitySystemComponent=AuraPlayerState->GetAbilitySystemComponent();
 	AttributeSet=AuraPlayerState->GetAttributeSet();
 
-	//add the overlay on the HUD
+	//initial all widget on the HUD
 	if(AAuraPlayerController* AuraPlayerController=Cast<AAuraPlayerController>(GetController()))
 	{
 		if(AAuraHUD* AuraHUD=Cast<AAuraHUD>(AuraPlayerController->GetHUD()))
