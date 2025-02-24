@@ -55,6 +55,13 @@ struct FEffectProperties
 	ACharacter* TargetCharacter=nullptr;
 };
 
+//typedef is specific to the FGameplayAttribute() signature, but TStaticFunPtr is generic to any signature
+//typedef TBaseStaticDelegateInstance<FGameplayAttribute(),FDefaultDelegateUserPolicy>::FFuncPtr FAttributeFuncPtr;
+
+template<class T>
+using TStaticFuncPtr=typename TBaseStaticDelegateInstance<T,FDefaultDelegateUserPolicy>::FFuncPtr;
+
+
 /**
  * 
  */
@@ -80,8 +87,10 @@ public:
 
 	//the function to register replicate variable
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
-
-
+	
+	TMap<FGameplayTag,TStaticFuncPtr<FGameplayAttribute()>> TagsToAttributes;
+	
+	
 	/**
 	 * Primary Attributes
 	 */
@@ -130,48 +139,56 @@ public:
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_BlockChance,Category="Secondary Attributes")
 	FGameplayAttributeData BlockChance;
 	//this macro make 4 function here(include set/init/get BlockChance)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,BlockChance);
 
 	//character/Enemy's CriticalHitChance
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_CriticalHitChance,Category="Secondary Attributes")
 	FGameplayAttributeData CriticalHitChance;
 	//this macro make 4 function here(include set/init/get CriticalHitChance)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,CriticalHitChance);
 
 	//character/Enemy's CriticalHitDamage
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_CriticalHitDamage,Category="Secondary Attributes")
 	FGameplayAttributeData CriticalHitDamage;
 	//this macro make 4 function here(include set/init/get CriticalHitDamage)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,CriticalHitDamage);
 
 	//character/Enemy's CriticalHitResistance(the chance could resistance the Critical Hit)
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_CriticalHitResistance,Category="Secondary Attributes")
 	FGameplayAttributeData CriticalHitResistance;
 	//this macro make 4 function here(include set/init/get CriticalHitResistance)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,CriticalHitResistance);
 
 	//character/Enemy's HealthRegeneration
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_HealthRegeneration,Category="Secondary Attributes")
 	FGameplayAttributeData HealthRegeneration;
 	//this macro make 4 function here(include set/init/get HealthRegeneration)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,HealthRegeneration);
 
 	//character/Enemy's ManaRegeneration
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_ManaRegeneration,Category="Secondary Attributes")
 	FGameplayAttributeData ManaRegeneration;
 	//this macro make 4 function here(include set/init/get ManaRegeneration)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,ManaRegeneration);
 
 	//character/Enemy's MaxHealth
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_MaxHealth,Category="Secondary Attributes")
 	FGameplayAttributeData MaxHealth;
 	//this macro make 4 function here(include set/init/get MaxHealth)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,MaxHealth);
 
 	//character/Enemy's MaxMana
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_MaxMana,Category="Secondary Attributes")
 	FGameplayAttributeData MaxMana;
 	//this macro make 4 function here(include set/init/get Mana)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,MaxMana);
 	
 	/**
@@ -182,12 +199,14 @@ public:
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Health,Category="Vital Attributes")
 	FGameplayAttributeData Health;
 	//this macro make 4 function here(include set/init/get health)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Health);
 
 	//character/Enemy's current mana
 	UPROPERTY(BlueprintReadOnly,ReplicatedUsing=OnRep_Mana,Category="Vital Attributes")
 	FGameplayAttributeData Mana;
 	//this macro make 4 function here(include set/init/get Mana)
+	//get function return current value
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet,Mana);
 
 

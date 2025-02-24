@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
+#include "AuraGameplayTags.h"
 #include "Net/UnrealNetwork.h"
 #include "GameplayEffectExtension.h"
 #include "GameFramework/Character.h"
@@ -12,8 +13,18 @@
 UAuraAttributeSet::UAuraAttributeSet()
 {
 	//init default Health/Mana
-	InitHealth(10.f);
-	InitMana(10.f);
+	//InitHealth(10.f);
+	//InitMana(10.f);
+
+	//get the tags assume
+	const FAuraGameplayTags& GameplayTags=FAuraGameplayTags::Get();
+
+
+	//could get the attribute by Tags
+	TagsToAttributes.Add(GameplayTags.Attribute_Primary_Strength,GetStrengthAttribute);
+	TagsToAttributes.Add(GameplayTags.Attribute_Primary_Intelligence,GetIntelligenceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attribute_Primary_Resilience,GetResilienceAttribute);
+	TagsToAttributes.Add(GameplayTags.Attribute_Primary_Vigor,GetVigorAttribute);
 }
 
 /////////////////////////////////////////////////////////////////

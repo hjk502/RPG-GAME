@@ -64,6 +64,7 @@ void AAuraCharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GamePlay
 
 void AAuraCharacterBase::InitializeDefaultAttriutes() const
 {
+	//effect current value,infinite gameplayEffect
 	ApplyEffectToSelf(DefaultPrimaryAttributes,1.0f);
 	ApplyEffectToSelf(DefaultSecondaryAttributes,1.0f);
 	ApplyEffectToSelf(DefaultVitalAttributes,1.0f);
