@@ -19,6 +19,7 @@ private:
 	
 protected:
 
+	//when the GameplayEffect(include instance and ) Applied to Self(then call function)
 	void EffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
 	
 public:
@@ -28,4 +29,7 @@ public:
 
 	//
 	FEffectAssetTags EffectAssetTags;
+
+	//abilitySystemComponent add the ability to character
+	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
 };
