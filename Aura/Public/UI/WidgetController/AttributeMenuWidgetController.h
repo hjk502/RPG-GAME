@@ -19,6 +19,9 @@ class AURA_API UAttributeMenuWidgetController : public UAuraWidgetController
 	GENERATED_BODY()
 private:
 
+	//the detail in lambda that bind with ASC change attribute delegate
+	void BroadcastAttributeInfo(const FGameplayTag& AttributeTag,const FGameplayAttribute& Attribute) const;
+	
 protected:
 
 	//get the data asset to store FAttributeInfo
@@ -27,7 +30,7 @@ protected:
 	
 public:
 
-	
+	//bind the function to receive the broadCast from the ASC change attribute delegate
 	virtual void BindCallbacksToDependencies() override;
 
 	//initial the value on the attribute menu

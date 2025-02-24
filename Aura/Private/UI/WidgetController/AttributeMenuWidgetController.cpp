@@ -7,26 +7,44 @@
 #include "AbilitySystem/Data/AttributeInfo.h"
 #include "AuraGameplayTags.h"
 
+void UAttributeMenuWidgetController::BroadcastAttributeInfo(const FGameplayTag& AttributeTag,const FGameplayAttribute& Attribute) const
+{
+	FAuraAttributeInfo Info=AttributeInfo->FindAttributeInfoForTag(AttributeTag);
+	Info.AttributeValue=Attribute.GetNumericValue(AttributeSet);
+	//broadCast the info if ASC change the Attribute
+	AttributeInfoDelegate.Broadcast(Info);
+}
+
 void UAttributeMenuWidgetController::BindCallbacksToDependencies()
 {
+	UAuraAttributeSet* AS=CastChecked<UAuraAttributeSet>(AttributeSet);
+	check(AttributeInfo);
+
+	//Mapping tag to function GetAttribute()
+	for(auto& Pair:AS->TagsToAttributes)
+	{
+		//bind to delegate let ASC monitor,if the Attribute change,then call bind function
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(Pair.Value()).AddLambda(
+			[this,Pair,AS](const FOnAttributeChangeData& Data)
+			{
+				BroadcastAttributeInfo(Pair.Key,Pair.Value());
+			}
+	    );
+
 		
+	}
 }
 
 void UAttributeMenuWidgetController::BroadcastInitialValue()
 {
 	UAuraAttributeSet* AS=CastChecked<UAuraAttributeSet>(AttributeSet);
-
-	//broadCast the Strength value on the attribute menu
+	
 	check(AttributeInfo);
 
 	for(auto& Pair:AS->TagsToAttributes)
 	{
-		FAuraAttributeInfo Info=AttributeInfo->FindAttributeInfoForTag(Pair.Key);
 
-		//get the attribute current value from this attribute
-		Info.AttributeValue=Pair.Value().GetNumericValue(AS);
-		AttributeInfoDelegate.Broadcast(Info);
-		
+		BroadcastAttributeInfo(Pair.Key,Pair.Value());
 	}
 	
 }
