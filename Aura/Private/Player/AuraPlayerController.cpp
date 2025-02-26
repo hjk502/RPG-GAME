@@ -52,7 +52,8 @@ void AAuraPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	UEnhancedInputComponent* EnhancedInputComponent=CastChecked<UEnhancedInputComponent>(InputComponent);
-	//ETriggerEvent::Triggered mean 
+	
+	//ETriggerEvent::Triggered mean it is happening,AAuraPlayerController::Move will store the value
 	EnhancedInputComponent->BindAction(MoveAction,ETriggerEvent::Triggered,this,&AAuraPlayerController::Move);
 	
 }
