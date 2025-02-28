@@ -14,4 +14,16 @@ class AURA_API UAuraGameplayAbility : public UGameplayAbility
 {
 	GENERATED_BODY()
 	
+private:
+
+	
+	
+protected:
+
+	
+public:
+
+	//the default tag that the ability have
+	UPROPERTY(EditDefaultsOnly,Category="Input")
+	FGameplayTag StartupInputTag;
 };

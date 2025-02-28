@@ -14,6 +14,7 @@ class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
 class IEnemyInterface;
+class UAuraAbilitySystemComponent;
 
 /**
  * 
@@ -41,19 +42,27 @@ private:
 	//test the actor if implemented interface
 	IEnemyInterface* LastActor=nullptr;
 	IEnemyInterface* ThisActor=nullptr;
-	
-	//the DataAsset(the relatives between Tags and InputAction)
-	UPROPERTY(EditDefaultsOnly,Category="Input")
-	TObjectPtr<UAuraInputConfig> InputConfig;
 
 	/**
-	 * Callback function that AbilityInput Call
+	 * Callback function that bind with UAuraInputComponent
 	 */
+	
 	void AbilityInputTagPressed(FGameplayTag InputTag);
 
 	void AbilityInputTagReleased(FGameplayTag InputTag);
 
 	void AbilityInputTagHeld(FGameplayTag InputTag);
+
+	//the DataAsset(the relatives between Tags and InputAction)
+	UPROPERTY(EditDefaultsOnly,Category="Input")
+	TObjectPtr<UAuraInputConfig> InputConfig;
+
+	//store the AuraAbilitySystemComponent in AuraPlayerController
+	UPROPERTY()
+	TObjectPtr<UAuraAbilitySystemComponent> AuraAbilitySystemComponent;
+
+	//get the AuraAbilitySystemComponent store in the AuraPlayerController
+	UAuraAbilitySystemComponent* GetASC();
 	
 protected:
 	virtual void BeginPlay() override;

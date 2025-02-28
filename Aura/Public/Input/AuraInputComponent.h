@@ -39,6 +39,7 @@ void UAuraInputComponent::BindAbilityActions(const UAuraInputConfig* InputConfig
 			//if this action need Press to trigger once,then this case
 			if(PressedFunc)
 			{
+				//the bindAction could pass the variable to 
 				BindAction(Action.InputAction,ETriggerEvent::Started,Object,PressedFunc,Action.InputTag);
 			}
 

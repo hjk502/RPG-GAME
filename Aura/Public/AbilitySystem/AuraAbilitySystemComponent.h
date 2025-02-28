@@ -32,4 +32,9 @@ public:
 
 	//abilitySystemComponent add the ability to character
 	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
+
+	//
+	void AbilityInputTagHeld(const FGameplayTag& InputTag);
+
+	void AbilityInputTagReleased(const FGameplayTag& InputTag);
 };
