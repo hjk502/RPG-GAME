@@ -15,6 +15,7 @@ class UInputAction;
 struct FInputActionValue;
 class IEnemyInterface;
 class UAuraAbilitySystemComponent;
+class USplineComponent;
 
 /**
  * 
@@ -63,6 +64,31 @@ private:
 
 	//get the AuraAbilitySystemComponent store in the AuraPlayerController
 	UAuraAbilitySystemComponent* GetASC();
+
+	/**
+	 * AuraCharacter click to move
+	 */
+
+	//the Destination that character need to move
+	FVector CachedDestination=FVector::ZeroVector;
+
+	//the time that player press mouse left button to move
+	float FollowTime=0.f;
+
+	//if Follow Time less this Threshold,then judge it be short move
+	float ShortPressThreshold=0.f;
+
+	bool bAutoRunning=false;
+
+	bool bTargeting=false;
+
+	//if the character's distance with Destination less than this,then stop auto run
+	UPROPERTY(EditDefaultsOnly)
+	float AutoRunAcceptanceRadius=50.f;
+
+	//the spline 
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USplineComponent> Spline;
 	
 protected:
 	virtual void BeginPlay() override;

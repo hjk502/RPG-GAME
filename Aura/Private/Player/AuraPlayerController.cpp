@@ -2,8 +2,9 @@
 
 
 #include "Player/AuraPlayerController.h"
-
+#include "Components/SplineComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
+#include "AuraGameplayTags.h"
 #include "EnhancedInputSubsystems.h"
 #include "AbilitySystem/AuraAbilitySystemComponent.h"
 #include "Input/AuraInputComponent.h"
@@ -12,6 +13,10 @@
 AAuraPlayerController::AAuraPlayerController()
 {
 	bReplicates = true;
+
+	//create spline component
+	Spline=CreateDefaultSubobject<USplineComponent>("Spline");
+
 	
 }
 
@@ -93,7 +98,14 @@ UAuraAbilitySystemComponent* AAuraPlayerController::GetASC()
 
 void AAuraPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	//GEngine->AddOnScreenDebugMessage(1,3.f,FColor::Red,*InputTag.ToString());
+
+	if(InputTag.MatchesTagExact(FAuraGameplayTags::Get().InputTag_LMB))
+	{
+		bTargeting=ThisActor?true:false;
+		bAutoRunning=false;
+
+		
+	}
 }
 
 void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
@@ -106,9 +118,46 @@ void AAuraPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 
 void AAuraPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	if(GetASC()==nullptr){return;}
+
+	if(!InputTag.MatchesTagExact(FAuraGameplayTags::Get().InputTag_LMB))
+	{
+		if(GetASC())
+		{
+			GetASC()->AbilityInputTagHeld(InputTag);
+		}
+		return;
+	}
+
+
+	/**
+	 * handle mouse left button held
+	 */
 	
-	GetASC()->AbilityInputTagHeld(InputTag);
+	
+	//if the character held left Mouse button and target enemy,then active ability
+	if(bTargeting)
+	{
+		if(GetASC())
+		{
+			GetASC()->AbilityInputTagHeld(InputTag);
+		}
+	}
+	else //in this case,aura character is held click left mouse button to move
+	{
+		FollowTime+=GetWorld()->GetDeltaSeconds();
+
+		FHitResult Hit;
+		if(GetHitResultUnderCursor(ECC_Visibility,false,Hit))
+		{
+			CachedDestination=Hit.ImpactPoint;
+		}
+
+		if(APawn* ControlledPawn=GetPawn())
+		{
+			const FVector WorldDirection=(CachedDestination-ControlledPawn->GetActorLocation()).GetSafeNormal();
+			ControlledPawn->AddMovementInput(WorldDirection);
+		}
+	}
 }
 
 /////////////////////////////////////////////////////////////////
